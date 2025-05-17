@@ -1,0 +1,21 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Fortran module files
+*.mod
+*.smod
+
+#Code::Blocks project files
+
+*.workspace
+*.workspace.layout
+*.cbp
+*.depend
+*.layout
