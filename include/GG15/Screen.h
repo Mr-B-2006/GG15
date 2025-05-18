@@ -18,13 +18,15 @@
 #include <unistd.h>
 #include <sys/socket.h>
 
+#include "Drawable.h"
+
 namespace GG15
 {
     class Screen
     {
     private: //make it possible to for a screen to only refresh when the user calls a certain function
         int fps = 0; //0fps = unlimited
-        char framebuffer[G15_WIDTH][G15_HEIGHT];
+        char framebuffer[G15_BUFSIZE];
         int keystate = 0;
         int id; //make a getter for this?
 
@@ -43,6 +45,7 @@ namespace GG15
         char get_pixel(int x, int y);
         void set_pixel(int x, int y, bool pixel_on);
         void invert_screen();
+        void draw(GG15::Drawable to_draw);
     };
 }
 
