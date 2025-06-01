@@ -13,19 +13,26 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
-//#include <libg15.h>
 #include <g15daemon_client.h>
 #include <unistd.h>
 #include <sys/socket.h>
 
 #include "Drawable.h"
 
+/*
+
+01/06/2025: dedicate this day to admin:
+1) make a roadmap of what to do here on out github page, remember, as quickly as we want the Bad Apple project done, it is a demo for GG15, thus we need to get all major features working with it
+2) after this for the rest of the day work on admin for older projects, just documentation/how to use documents for LMC naughts and crosses and Bogosearch
+3) as for Bow, make the actual Bow repo private, maybe keeping the NEA project repo (if it had its own repo, (i don rember :/ ))
+*/
+
 namespace GG15
 {
     class Screen
     {
     private: //make it possible to for a screen to only refresh when the user calls a certain function
-        int fps = 0; //0fps = unlimited
+        unsigned int fps = 0; //0fps = unlimited
         char framebuffer[G15_BUFSIZE];
         int keystate = 0;
         int id; //make a getter for this?
@@ -39,13 +46,13 @@ namespace GG15
         void display_to_LCD(); //^----update documentation to reflect this
         void take_input();
         int get_keystate();
-        void copy_to_framebuffer(char copied_buff[G15_WIDTH][G15_HEIGHT]);
+        void copy_to_framebuffer(char copied_buff[G15_BUFSIZE]);
         int get_screen_id();
-        void get_framebuffer(char fb_destination[G15_WIDTH][G15_HEIGHT]);
+        void get_framebuffer(char fb_destination[G15_BUFSIZE]);
         char get_pixel(int x, int y);
         void set_pixel(int x, int y, bool pixel_on);
         void invert_screen();
-        void draw(GG15::Drawable to_draw);
+        void draw(GG15::Drawable &to_draw);
     };
 }
 

@@ -32,7 +32,7 @@ void GG15::Screen::display_to_LCD()
     }
 }
 
-void GG15::Screen::copy_to_framebuffer(char copied_buff[G15_WIDTH][G15_HEIGHT])
+void GG15::Screen::copy_to_framebuffer(char copied_buff[G15_BUFSIZE])
 {
     memcpy(this->framebuffer, copied_buff, G15_BUFSIZE);
 }
@@ -52,7 +52,7 @@ int GG15::Screen::get_screen_id()
     return this->id;
 }
 
-void GG15::Screen::get_framebuffer(char fb_destination[G15_WIDTH][G15_HEIGHT])
+void GG15::Screen::get_framebuffer(char fb_destination[G15_BUFSIZE])
 {
     memcpy(fb_destination, this->framebuffer, G15_BUFSIZE);
 }
@@ -77,7 +77,25 @@ void GG15::Screen::invert_screen()
     }
 }
 
-void GG15::Screen::draw(GG15::Drawable to_draw)
+void GG15::Screen::draw(GG15::Drawable &to_draw)
 {
+    int y_offset = 0;
+    int x_offset = 0;
+    for (int i=0; i!=to_draw.get_pixel_data_size(); i++)
+    {
+        int this_pixel_xpos = to_draw.get_position().x + x_offset;
+        int this_pixel_ypos = to_draw.get_position().y + y_offset;
 
+        if (i % to_draw.get_dimensions().x == 0)
+        {
+            y_offset++;
+            x_offset = 0;
+        }
+        if ( (to_draw[i] == 0 || to_draw[i] == 1) && (this_pixel_xpos < G15_WIDTH && this_pixel_xpos >= 0) && (this_pixel_ypos < G15_HEIGHT && this_pixel_ypos >= 0))
+        {
+            set_pixel(this_pixel_xpos, this_pixel_ypos, to_draw[i]);
+
+        } //else we dont place a pixel as this is a "transparent" pixel
+        x_offset++;
+    }
 }

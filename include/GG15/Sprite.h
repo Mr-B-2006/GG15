@@ -1,7 +1,8 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "Drawable.h"
+#include <cstring>
+#include "Texture.h"
 
 namespace GG15
 {
@@ -9,15 +10,15 @@ namespace GG15
     {
         private:
         GG15::Texture *texture_ref;
-        GG15::pixel_vector texture_region;
+        GG15::Region texture_region;
 
         public:
         Sprite();
-        virtual ~Sprite();
+        ~Sprite();
 
-        GG15::pixel_vector get_texture_region();
+        GG15::Region get_texture_region();
         void set_texture_region(int x, int y);
-
+        void assign_texture(GG15::Texture *texture);
 
     };
 }
