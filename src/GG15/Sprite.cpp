@@ -21,14 +21,11 @@ GG15::Region GG15::Sprite::get_texture_region()
     return texture_region;
 }
 
-std::vector<uint8_t> GG15::Sprite::get_sprite() //this func allocates memory to the heap, it needs to be stored in a variable and its memory must be freed after use
-{ //we gonna convert the std::vector to a uint8_t array, on the user-side this needs to be put into an a
- //  int seek_begin = GG15::coords_to_index(texture_region.top_left.x, texture_region.top_left.y, this->width);
-//   int seek_end = GG15::coords_to_index(texture_region.bottom_right.x, texture_region.bottom_right.y, this->width);
+std::vector<uint8_t> GG15::Sprite::get_sprite()
+{
     std::vector<uint8_t> spr_data;
     for (int i=0; i != texture_ref->get_texture_data().size(); i++) //first index returns garbage data???????? maybe has to do with how vector is called? maybe try using heap memory???
     {
-
         spr_data.push_back(texture_ref->get_texture_data().at(i));
     }
     return spr_data;

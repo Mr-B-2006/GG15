@@ -82,7 +82,6 @@ void GG15::Screen::draw(GG15::Sprite &to_draw)
     int x_offset = 0;
     int y_offset = 0;
     std::vector<uint8_t> spr_data = to_draw.get_sprite();
-        std::cout << to_draw.get_dimensions().x << ", " << to_draw.get_dimensions().y << "\n";
 
     for (int i=0; i!=spr_data.size(); i++)
     {
