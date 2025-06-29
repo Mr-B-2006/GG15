@@ -18,6 +18,7 @@
 #include <sys/socket.h>
 
 #include "Drawable.h"
+#include "Sprite.h"
 
 /*
 
@@ -41,8 +42,8 @@ namespace GG15
         Screen(int fps_param);
         ~Screen();
 
-
         void clear_screen(bool pixel_on); //add boolean parameter to clear with either white pixels or orange
+
         void display_to_LCD(); //^----update documentation to reflect this
         void take_input();
         int get_keystate();
@@ -52,7 +53,7 @@ namespace GG15
         char get_pixel(int x, int y);
         void set_pixel(int x, int y, bool pixel_on);
         void invert_screen();
-        void draw(GG15::Drawable &to_draw);
+        void draw(GG15::Sprite &to_draw);
     };
 }
 

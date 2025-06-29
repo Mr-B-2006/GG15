@@ -25,28 +25,31 @@ void GG15::Texture::load_from_string(std::string &data)
     texture_data.clear();
     texture_data.shrink_to_fit();
 
+    bool wflag = false;
+
     for (int i=0; i != data.length(); i++)
     {
+        if (!wflag)
+        {
+            width++;
+        }
         if (data[i] != '\n')
         {
             texture_data.push_back(data[i] - '0');
-        }
-        else
-        {
-            height++;
+                  //  std::cout << texture_data[i] +0;
 
         }
-        std::cout << texture_data[i];
+        else if (data[i] == '\n')
+        {
+            wflag = true;
+            height++;
+           // std::cout << "\n";
+
+        }
     }
-    if (height != 0)
-    {
-        width = (data.length() - height) / height;
-    }
-    else
-    {
-        height = 1;
-        width = data.length();
-    }
+    width--;
+    //std::cout << width;
+    //std::cout << "\n\n\n\n\n";
 }
 
 GG15::Pixel_vector GG15::Texture::get_dimensions()

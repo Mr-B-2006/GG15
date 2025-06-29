@@ -77,25 +77,31 @@ void GG15::Screen::invert_screen()
     }
 }
 
-void GG15::Screen::draw(GG15::Drawable &to_draw)
+void GG15::Screen::draw(GG15::Sprite &to_draw)
 {
-    int y_offset = 0;
     int x_offset = 0;
-    for (int i=0; i!=to_draw.get_pixel_data_size(); i++)
+    int y_offset = 0;
+    std::vector<uint8_t> spr_data = to_draw.get_sprite();
+        std::cout << to_draw.get_dimensions().x << ", " << to_draw.get_dimensions().y << "\n";
+
+    for (int i=0; i!=spr_data.size(); i++)
     {
         int this_pixel_xpos = to_draw.get_position().x + x_offset;
         int this_pixel_ypos = to_draw.get_position().y + y_offset;
 
-        if (i % to_draw.get_dimensions().x == 0)
+
+        if (x_offset == to_draw.get_dimensions().x-1)
         {
             y_offset++;
-            x_offset = 0;
+            x_offset = -1;
         }
-        if ( (to_draw[i] == 0 || to_draw[i] == 1) && (this_pixel_xpos < G15_WIDTH && this_pixel_xpos >= 0) && (this_pixel_ypos < G15_HEIGHT && this_pixel_ypos >= 0))
+        if ( (spr_data[i] == 0 || spr_data[i] == 1) && (this_pixel_xpos < G15_WIDTH && this_pixel_xpos >= 0) && (this_pixel_ypos < G15_HEIGHT && this_pixel_ypos >= 0))
         {
-            set_pixel(this_pixel_xpos, this_pixel_ypos, to_draw[i]);
-
+            set_pixel(this_pixel_xpos, this_pixel_ypos, spr_data[i]);
         } //else we dont place a pixel as this is a "transparent" pixel
         x_offset++;
     }
 }
+
+//I imagine we will want different functions for the different types of drawable as they WILL have to be drawn differently (for example, doing geometric calculations (with different formulae at that) for shapes, rather than just outputting texture data like we would with sprites)
+//also, textures shouldnt be assigned to drawables, as we are going to want to assign textures to shapes differnetly than we will to drawables
