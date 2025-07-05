@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <vector>
 #include <inttypes.h>
-#include <g15daemon_client.h>
 
 #include "Texture.h"
 

@@ -6,6 +6,8 @@
 #include <inttypes.h>
 #include <algorithm>
 #include <string>
+#include <fstream>
+#include <cstdlib>
 
 #include "Drawable.h"
 

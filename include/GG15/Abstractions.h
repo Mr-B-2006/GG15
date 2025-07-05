@@ -29,4 +29,4 @@ namespace GG15
     }
 }
 
-#endif // ABSTRACTIONS_H_INCLUDED
+#endif //ABSTRACTIONS_H_INCLUDED
