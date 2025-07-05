@@ -20,31 +20,24 @@
 #include "Drawable.h"
 #include "Sprite.h"
 
-/*
-
-01/06/2025: dedicate this day to admin:
-1) make a roadmap of what to do here on out github page, remember, as quickly as we want the Bad Apple project done, it is a demo for GG15, thus we need to get all major features working with it
-2) after this for the rest of the day work on admin for older projects, just documentation/how to use documents for LMC naughts and crosses and Bogosearch
-3) as for Bow, make the actual Bow repo private, maybe keeping the NEA project repo (if it had its own repo, (i don rember :/ ))
-*/
 
 namespace GG15
 {
     class Screen
     {
-    private: //make it possible to for a screen to only refresh when the user calls a certain function
-        unsigned int fps = 0; //0fps = unlimited
+    private:
+        unsigned int fps = 0; //0fps = unlimited, not recommended, will probably cause G15daemon to be unstable
         char framebuffer[G15_BUFSIZE];
         int keystate = 0;
-        int id; //make a getter for this?
+        int id;
 
-    public: //TO DO: add an invert function that performs NOT operations on each pixel in the framebuffer
+    public:
         Screen(int fps_param);
         ~Screen();
 
-        void clear_screen(bool pixel_on); //add boolean parameter to clear with either white pixels or orange
+        void clear_screen(bool pixel_on);
 
-        void display_to_LCD(); //^----update documentation to reflect this
+        void display_to_LCD(); //^----update documentation cause we now have clear screen with pixel on or pixel of parameter
         void take_input();
         int get_keystate();
         void copy_to_framebuffer(char copied_buff[G15_BUFSIZE]);

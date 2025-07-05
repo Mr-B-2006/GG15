@@ -12,7 +12,6 @@ namespace GG15
     {
         protected:
 
-
         int posX = 0;
         int posY = 0;
 
@@ -30,9 +29,6 @@ namespace GG15
         int get_pixel_data_size();
 
         GG15::Pixel_vector get_dimensions();
-
-        int operator[](int index);
-        uint8_t get_pixel(int x, int y); //multi-dimensional accessor
     };
 }
 

@@ -9,7 +9,6 @@ GG15::Screen::Screen(int fps_param)
     if (id < 0)
     {
         perror("Could not open G15daemon"); //maybe make it so we output an error when we see that the G15 has been disconnected, maybe maybe even try to have us be able to reconnect without restarting the program (be bale to reconnect the G15 while maintaining current program state)
-
     }
 }
 
@@ -88,15 +87,18 @@ void GG15::Screen::draw(GG15::Sprite &to_draw)
         int this_pixel_xpos = to_draw.get_position().x + x_offset;
         int this_pixel_ypos = to_draw.get_position().y + y_offset;
 
-
         if (x_offset == to_draw.get_dimensions().x-1)
         {
-            y_offset++;
             x_offset = -1;
+            y_offset++;
         }
         if ( (spr_data[i] == 0 || spr_data[i] == 1) && (this_pixel_xpos < G15_WIDTH && this_pixel_xpos >= 0) && (this_pixel_ypos < G15_HEIGHT && this_pixel_ypos >= 0))
         {
             set_pixel(this_pixel_xpos, this_pixel_ypos, spr_data[i]);
+            if (y_offset-1 == to_draw.get_dimensions().y)
+            {
+                break;
+            }
         } //else we dont place a pixel as this is a "transparent" pixel
         x_offset++;
     }

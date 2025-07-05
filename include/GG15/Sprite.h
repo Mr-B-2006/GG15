@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <vector>
 #include <inttypes.h>
+#include <g15daemon_client.h>
 
 #include "Texture.h"
 
@@ -16,7 +17,6 @@ namespace GG15
         GG15::Region texture_region = {0,0,0,0};
         GG15::Texture *texture_ref;
 
-
         public:
 
         Sprite();
@@ -24,10 +24,9 @@ namespace GG15
 
         GG15::Texture *get_texture_reference();
         GG15::Region get_texture_region();
-        std::vector<uint8_t> get_sprite(); //return array of uint_8 instead
+        std::vector<uint8_t> get_sprite();
         void set_texture_region(int x1, int y1, int x2, int y2);
         void assign_texture(GG15::Texture *texture);
-
     };
 }
 
